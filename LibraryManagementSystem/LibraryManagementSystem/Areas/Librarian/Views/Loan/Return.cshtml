@@ -1,0 +1,18 @@
+﻿@model Loan
+
+<div class="container">
+    <h2 class="text-primary">Return Book</h2>
+    <p>Are you sure you want to mark the following book as returned?</p>
+
+    <div class="border p-3 mb-4">
+        <p><strong>Member:</strong> @Model.Member?.FullName</p>
+        <p><strong>Book:</strong> @Model.Book?.Title</p>
+        <p><strong>Loan Date:</strong> @Model.LoanDate.ToString("d")</p>
+        <p><strong>Due Date:</strong> @Model.DueDate.ToString("d")</p>
+    </div>
+
+    <form asp-action="Return" asp-route-id="@Model.LoanId" method="post">
+        <button type="submit" class="btn btn-danger">Return Book</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+﻿@model List<Member>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Members
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Member" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> ADD NEW MEMBER
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped width="100%">
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Membership Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model)
+            {
+                <tr>
+                    <td>@member.FullName</td>
+                    <td>@member.Email</td>
+                    <td>@member.MembershipDate</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@member.MemberId" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a> |
+                        <a asp-action="Delete" asp-route-id="@member.MemberId" class="btn btn-danger">
+                            <i class="bi bi-trash3-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+

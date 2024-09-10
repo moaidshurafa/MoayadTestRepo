@@ -1,0 +1,48 @@
+﻿@model List<Loan>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Loan History</h2>
+        </div>
+    </div>
+         
+    <div class="col-6 col-md-3">
+        <a asp-controller="Loan" asp-action="Create" class="btn btn-primary border form-control">
+            Create
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Book</th>
+                <th>Loan Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.Member?.FullName</td>
+                    <td>@loan.Book?.Title</td>
+                    <td>@loan.LoanDate.ToString("d")</td>
+                    <td>@loan.DueDate.ToString("d")</td>
+                    <td>@loan.ReturnDate?.ToString("d")</td>
+                    <td>
+                        @if (loan.ReturnDate == null)
+                        {
+                            <a asp-action="Return" asp-route-id="@loan.LoanId" class="btn btn-primary">Return</a>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+﻿@model List<Loan>
+
+<h2 class="text-primary">Overdue Books Report</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Book</th>
+            <th>Loan Date</th>
+            <th>Due Date</th>
+            <th>Days Overdue</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Member?.FullName</td>
+                <td>@loan.Book?.Title</td>
+                <td>@loan.LoanDate.ToString("d")</td>
+                <td>@loan.DueDate.ToString("d")</td>
+                <td>@(DateTime.Now - loan.DueDate).Days</td>
+            </tr>
+        }
+    </tbody>
+</table>

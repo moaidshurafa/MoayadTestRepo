@@ -1,0 +1,23 @@
+﻿@model List<Member>
+
+<h2 class="text-primary">Member Activity Report</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Email</th>
+            <th>Total Books Borrowed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.FullName</td>
+                <td>@member.Email</td>
+                <td>@member.Loans.Count</td> 
+            </tr>
+        }
+    </tbody>
+</table>

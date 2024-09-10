@@ -1,0 +1,59 @@
+﻿@model List<Book>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Book List 
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Book" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> ADD NEW BOOK
+            </a>
+        </div>
+    </div>
+
+<table class="table table-bordered table-striped width="100%">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Copies Available
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.ISBN</td>
+                    <td>@book.Author</td>
+                    <td>@book.Category?.CategoryName</td> 
+                    <td>@book.CopiesAvailable</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@book.BookId" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a> |
+                        <a asp-action="Delete" asp-route-id="@book.BookId" class="btn btn-danger">
+                            <i class="bi bi-trash3-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+</div>
+

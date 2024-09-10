@@ -1,0 +1,36 @@
+﻿@model List<Loan>
+
+    <h2 class="text-primary">Book Loans Report</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Book</th>
+                <th>Loan Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.Member?.FullName</td>
+                    <td>@loan.Book?.Title</td>
+                    <td>@loan.LoanDate.ToString("d")</td>
+                    <td>@loan.DueDate.ToString("d")</td>
+                    <td>
+                    @if(loan.ReturnDate != null)
+                    {
+                        @loan.ReturnDate.Value.ToString("d")
+                    }
+                    else
+                    {
+                        <span>Not returned</span>
+                    }
+                </td>
+                </tr>
+            }
+        </tbody>
+    </table>

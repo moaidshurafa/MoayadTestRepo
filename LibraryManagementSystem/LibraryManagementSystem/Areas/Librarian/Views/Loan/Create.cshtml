@@ -1,0 +1,43 @@
+﻿@model Loan
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-1">
+            <div class="form-group">
+                <label>Member</label>
+                <select asp-for="MemberId" class="form-control" asp-items="@(new SelectList(ViewBag.Members, "MemberId", "FullName"))"></select>
+            </div>
+            <div class="form-group">
+                <label>Book</label>
+                <select asp-for="BookId" class="form-control" asp-items="@(new SelectList(ViewBag.Books, "BookId", "Title"))"></select>
+            </div>
+            <div class="form-group">
+                <label>Loan Date</label>
+                <input type="hidden" asp-for="LoanDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" />
+                <input class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
+            </div>
+           
+            <div class="form-group">
+                <label>Due Date</label>
+                <input asp-for="DueDate" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-primary form-control"><i class="bi bi-plus-circle"></i> Issue Book</button>
+        </div>
+        <div class="col-6 col-md-3">
+            <a asp-controller="Loan" asp-action="Index" class="btn btn-secondary border form-control">
+                Back to List
+            </a>
+        </div>
+    </div>
+
+</form>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
