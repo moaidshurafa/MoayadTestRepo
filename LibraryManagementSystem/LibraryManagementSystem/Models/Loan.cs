@@ -26,5 +26,7 @@ namespace LibraryManagementSystem.Models
 
         [ForeignKey("MemberId")]
         public virtual Member? Member { get; set; }
+
+
     }
 }

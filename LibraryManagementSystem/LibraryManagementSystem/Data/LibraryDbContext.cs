@@ -27,6 +27,11 @@ namespace LibraryManagementSystem.Data
                 new Category { CategoryId = 2, CategoryName = "SciFi" },
                 new Category { CategoryId = 3, CategoryName = "History" }
                 );
+        //    modelBuilder.Entity<Loan>()
+        //.HasOne(l => l.Member)
+        //.WithMany(m => m.Loans)
+        //.HasForeignKey(l => l.MemberId)
+        //.OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

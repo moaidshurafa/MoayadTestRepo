@@ -1,6 +1,8 @@
 ﻿using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystem.Areas.Librarian.Controllers
 {
@@ -78,11 +80,25 @@ namespace LibraryManagementSystem.Areas.Librarian.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Member? obj = _db.Members.Find(id);
+
+            //   Member? obj = _db.Members.Find(id);
+            var obj = _db.Members.Include(m => m.Loans).ThenInclude(l => l.Book).FirstOrDefault(m => m.MemberId == id);
+
             if (obj == null)
             {
                 return NotFound();
             }
+            var unreturnedLoans = obj.Loans.Where(l => l.ReturnDate == null).ToList();
+            foreach (var loan in unreturnedLoans)
+            {
+                var book = loan.Book;
+                if (book != null)
+                {
+                    book.CopiesAvailable++;
+                    _db.Books.Update(book);
+                }
+            }
+            _db.Loans.RemoveRange(obj.Loans);
             _db.Members.Remove(obj);
             _db.SaveChanges();
             TempData["success"] = "Member deleted successfully";

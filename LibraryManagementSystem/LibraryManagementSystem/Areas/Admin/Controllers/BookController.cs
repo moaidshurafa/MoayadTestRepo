@@ -90,10 +90,18 @@ namespace LibraryManagementSystem.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Book? obj = _db.Books.Find(id);
+            //Book? obj = _db.Books.Find(id);
+            var obj = _db.Books.Include(b => b.Loans).FirstOrDefault(b => b.BookId == id);
+
             if (obj == null)
             {
                 return NotFound();
+            }
+
+            var relatedLoans = obj.Loans.ToList();
+            foreach (var loan in relatedLoans)
+            {
+                _db.Loans.Remove(loan);
             }
             _db.Books.Remove(obj);
             _db.SaveChanges();

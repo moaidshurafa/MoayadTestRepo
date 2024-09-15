@@ -31,5 +31,8 @@ namespace LibraryManagementSystem.Models
 
         [ForeignKey("CategoryId")]
         public virtual Category? Category { get; set; }
+
+        public virtual ICollection<Loan> Loans { get; set; }
+
     }
 }
