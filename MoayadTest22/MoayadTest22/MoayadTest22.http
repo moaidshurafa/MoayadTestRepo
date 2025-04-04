@@ -1,0 +1,6 @@
+@MoayadTest22_HostAddress = http://localhost:5276
+
+GET {{MoayadTest22_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
